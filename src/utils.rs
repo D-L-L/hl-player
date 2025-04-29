@@ -24,10 +24,11 @@ pub enum AudioFormat {
 	OGG,
 	OPUS,
 	WAVE,
+	M4B,
 }
 
-pub fn get_audio_format(path: &Path) -> Option<AudioFormat> {
-	let extension = match path.extension() {
+pub fn get_audio_format<P: AsRef<Path>>(path: P) -> Option<AudioFormat> {
+	let extension = match path.as_ref().extension() {
 		Some(e) => e,
 		_ => return None,
 	};
@@ -46,6 +47,7 @@ pub fn get_audio_format(path: &Path) -> Option<AudioFormat> {
 		"ogg" => Some(AudioFormat::OGG),
 		"opus" => Some(AudioFormat::OPUS),
 		"wav" => Some(AudioFormat::WAVE),
+		"m4b" => Some(AudioFormat::M4B),
 		_ => None,
 	}
 }
